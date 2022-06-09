@@ -18,8 +18,8 @@ Render an isometric head using a Mojang skin\
 Render an isometric head using a Mojang skin of size 256x256\
 `https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric&size=256`
 
-Render a flat head using a Crafatar skin of size 128x128 without overlay\
-`https://mchr.cerus.dev/v1/render/Cerus_?skin=crafatar&size=128&overlay=false`
+Render a flat head using a Minotar skin of size 128x128 without overlay\
+`https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false`
 
 ## Installation
 
