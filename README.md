@@ -3,23 +3,68 @@
 MCHR (mc head render) is a simple Minecraft skin rendering service. MCHR can be configured to use a variety of skin providers. While other services
 such as Minotar and Crafatar only allow you to render the skin of usernames / uuids, MCHR allows you to render skins that are not in use by players.
 
-Public instance: mchr.cerus.dev
+Public instance: https://mchr.cerus.dev
+
+## Endpoints
+
+### V1
+
+Base path: `/v1`
+
+**GET /info**\
+Get information about the MCHR instance
+
+**GET /render/{skin_key}**\
+Render a head
+
+Query params:
+
+- (Optional) `skin`
+    - The skin provider
+    - Allowed values: id of a registered skin provider
+    - Default: `mojang`
+- (Optional) `renderer`
+    - The renderer
+    - Allowed values: `flat`, `isometric`
+- (Optional) `size`
+    - The desired with and height
+    - Examples: 128, 512, 16
+    - Default: `8`
+- (Optional) `overlay`
+    - Whether the hat overlay should be rendered or not
+    - Allowed values: `true`, `false`
+    - Default: `true`
+
+**GET /skins**\
+List all available skin providers
 
 ## Usage
 
 Example usage:
 
-Render a flat head using a Mojang skin\
-`https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75`
+<details>
+  <summary>Render a flat head using a Mojang skin</summary>
+  <a href="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75">https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75</a><br>
+  <img src="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75" alt="Rendered image">
+</details>
 
-Render an isometric head using a Mojang skin\
-`https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric`
+<details>
+  <summary>Render an isometric head using a Mojang skin</summary>
+  <a href="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric">https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric</a><br>
+  <img src="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric" alt="Rendered image">
+</details>
 
-Render an isometric head using a Mojang skin of size 256x256\
-`https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric&size=256`
+<details>
+  <summary>Render an isometric head using a Mojang skin of size 256x256</summary>
+  <a href="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric&size=256">https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric&size=256</a><br>
+  <img src="https://mchr.cerus.dev/v1/render/74d1e08b0bb7e9f590af27758125bbed1778ac6cef729aedfcb9613e9911ae75?renderer=isometric&size=256" alt="Rendered image">
+</details>
 
-Render a flat head using a Minotar skin of size 128x128 without overlay\
-`https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false`
+<details>
+  <summary>Render a flat head using a Minotar skin of size 128x128 without overlay</summary>
+  <a href="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false">https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false</a><br>
+  <img src="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false" alt="Rendered image">
+</details>
 
 ## Installation
 
