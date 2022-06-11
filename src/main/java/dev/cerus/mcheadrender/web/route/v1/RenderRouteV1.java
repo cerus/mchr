@@ -110,12 +110,12 @@ public class RenderRouteV1 extends Route {
     public @Nullable Collection<QueryParam> params() {
         return List.of(
                 new QueryParam("skin", "The skin provider", String.class, true,
-                        List.of("mojang", "namemc"), null, "mojang"),
+                        List.copyOf(this.webServer.getSkinProviderRegistry().ids()), null, "mojang"),
                 new QueryParam("renderer", "The renderer", String.class, true,
                         List.of("flat", "isometric"), null, "flat"),
                 new QueryParam("size", "The desired width and height", int.class, true,
                         null, List.of("128", "512", "16"), "8"),
-                new QueryParam("overlay", "Whether or not the hat overlay should be rendered",
+                new QueryParam("overlay", "Whether the hat overlay should be rendered or not",
                         boolean.class, true, List.of("true", "false"), null, "true")
         );
     }
