@@ -9,17 +9,17 @@ import dev.cerus.mcheadrender.web.route.v1.RoutesV1;
 public class RouteDocumenter {
 
     public static void register(final WebServer webServer) {
-        webServer.getApp().get("/", context -> context.status(200).html(generateHtml()));
+        webServer.getApp().get("/", context -> context.status(200).html(generateHtml(webServer)));
         webServer.getApp().error(404, ctx -> ctx.redirect("/"));
     }
 
-    private static String generateHtml() {
+    private static String generateHtml(final WebServer webServer) {
         final StringBuilder builder = new StringBuilder();
         builder.append("<html><head><title>MCHR Api</title></head><body><h2>MCHR api endpoints</h2><ul>");
 
         // V1
         builder.append("<li><a>v1</a><ul>");
-        for (final Route route : RoutesV1.all()) {
+        for (final Route route : RoutesV1.all(webServer)) {
             builder.append("<li><a href=\"").append(route.apiVersion()).append(route.path()).append("\">").append(route.type().name())
                     .append(" ").append(route.path()).append("</a>").append("<ul>");
             builder.append("<li><a>").append(route.description()).append("</a></li>");

@@ -20,11 +20,11 @@ public class RoutesV1 {
         app.addHandler(route.type(), "/" + route.apiVersion() + route.path(), route);
     }
 
-    public static List<Route> all() {
+    public static List<Route> all(final WebServer webServer) {
         return List.of(
-                new InfoRouteV1(null),
-                new RenderRouteV1(null),
-                new SkinsRouteV1(null)
+                new InfoRouteV1(webServer),
+                new RenderRouteV1(webServer),
+                new SkinsRouteV1(webServer)
         );
     }
 
