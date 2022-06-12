@@ -41,8 +41,9 @@ public class InfoRouteV1 extends Route {
                     "cached": %d,
                     "expiration_in_seconds": %d
                   },
-                  "skin_provider": %s,
-                  "renderer": %s,
+                  "skin_providers": %s,
+                  "renderers": %s,
+                  "filters": %s,
                   "ratelimit": {
                     "max_requests": %d,
                     "period_in_seconds": %d,
@@ -57,6 +58,9 @@ public class InfoRouteV1 extends Route {
                         .map(s -> "\"" + s + "\"")
                         .collect(Collectors.joining(", ")) + "]",
                 "[" + this.webServer.getRendererRegistry().ids().stream()
+                        .map(s -> "\"" + s + "\"")
+                        .collect(Collectors.joining(", ")) + "]",
+                "[" + this.webServer.getFilterRegistry().ids().stream()
                         .map(s -> "\"" + s + "\"")
                         .collect(Collectors.joining(", ")) + "]",
                 Globals.MAX_REQUESTS,
