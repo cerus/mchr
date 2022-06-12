@@ -34,6 +34,9 @@ Query params:
     - Whether the hat overlay should be rendered or not
     - Allowed values: `true`, `false`
     - Default: `true`
+- (Optional) `filter`
+    - The filters (concatenate filters with ,)
+    - Allowed values: id of a registered filter
 
 **GET /skins**\
 List all available skin providers
