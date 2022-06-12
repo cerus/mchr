@@ -2,6 +2,7 @@ package dev.cerus.mcheadrender.web.route.v1;
 
 import dev.cerus.mcheadrender.Globals;
 import static dev.cerus.mcheadrender.Globals.LOGGER;
+import dev.cerus.mcheadrender.filter.Filter;
 import dev.cerus.mcheadrender.image.ImageCache;
 import dev.cerus.mcheadrender.renderer.Renderer;
 import dev.cerus.mcheadrender.skin.SkinProvider;
@@ -15,8 +16,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,6 +91,17 @@ public class RenderRouteV1 extends Route {
         }
 
         final BufferedImage renderedHead = renderer.render(image, size, overlay);
+
+        final List<Filter> filters = ctx.queryParams("filter").stream()
+                .flatMap(s -> Arrays.stream(s.split(",")))
+                .map(s -> this.webServer.getFilterRegistry().get(s))
+                .filter(Objects::nonNull)
+                .distinct()
+                .toList();
+        for (final Filter filter : filters) {
+            filter.apply(renderedHead);
+        }
+
         this.img(ctx, renderedHead);
     }
 
@@ -112,7 +126,9 @@ public class RenderRouteV1 extends Route {
                 new QueryParam("skin", "The skin provider", String.class, true,
                         List.copyOf(this.webServer.getSkinProviderRegistry().ids()), null, "mojang"),
                 new QueryParam("renderer", "The renderer", String.class, true,
-                        List.of("flat", "isometric"), null, "flat"),
+                        List.copyOf(this.webServer.getRendererRegistry().ids()), null, "flat"),
+                new QueryParam("filter", "The filters (concatenate filters with ,)", String.class, true,
+                        List.copyOf(this.webServer.getFilterRegistry().ids()), null, null),
                 new QueryParam("size", "The desired width and height", int.class, true,
                         null, List.of("128", "512", "16"), "8"),
                 new QueryParam("overlay", "Whether the hat overlay should be rendered or not",

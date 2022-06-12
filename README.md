@@ -34,6 +34,9 @@ Query params:
     - Whether the hat overlay should be rendered or not
     - Allowed values: `true`, `false`
     - Default: `true`
+- (Optional) `filter`
+    - The filters (concatenate filters with ,)
+    - Allowed values: id of a registered filter
 
 **GET /skins**\
 List all available skin providers
@@ -64,6 +67,12 @@ Example usage:
   <summary>Render a flat head using a Minotar skin of size 128x128 without overlay</summary>
   <a href="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false">https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false</a><br>
   <img src="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&overlay=false" alt="Rendered image">
+</details>
+
+<details>
+  <summary>Render a flat head using a Minotar skin of size 128x128 with a grayscale filter</summary>
+  <a href="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&filter=grayscale">https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&filter=grayscale</a><br>
+  <img src="https://mchr.cerus.dev/v1/render/Cerus_?skin=minotar&size=128&filter=grayscale" alt="Rendered image">
 </details>
 
 ## Installation

@@ -1,5 +1,6 @@
 package dev.cerus.mcheadrender.web;
 
+import dev.cerus.mcheadrender.filter.Filter;
 import dev.cerus.mcheadrender.image.ImageCache;
 import dev.cerus.mcheadrender.renderer.Renderer;
 import dev.cerus.mcheadrender.skin.SkinProvider;
@@ -17,11 +18,16 @@ public class WebServer {
     private final Registry<Renderer> rendererRegistry;
     private final Registry<SkinProvider> skinProviderRegistry;
     private final ImageCache imageCache;
+    private final Registry<Filter> filterRegistry;
     private Javalin app;
 
-    public WebServer(final Registry<Renderer> rendererRegistry, final Registry<SkinProvider> skinProviderRegistry, final ImageCache imageCache) {
+    public WebServer(final Registry<Renderer> rendererRegistry,
+                     final Registry<SkinProvider> skinProviderRegistry,
+                     final Registry<Filter> filterRegistry,
+                     final ImageCache imageCache) {
         this.rendererRegistry = rendererRegistry;
         this.skinProviderRegistry = skinProviderRegistry;
+        this.filterRegistry = filterRegistry;
         this.imageCache = imageCache;
     }
 
@@ -64,6 +70,10 @@ public class WebServer {
 
     public Registry<SkinProvider> getSkinProviderRegistry() {
         return this.skinProviderRegistry;
+    }
+
+    public Registry<Filter> getFilterRegistry() {
+        return this.filterRegistry;
     }
 
 }

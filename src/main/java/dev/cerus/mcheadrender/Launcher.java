@@ -2,6 +2,9 @@ package dev.cerus.mcheadrender;
 
 import dev.cerus.mcheadrender.config.JsonFileSkinProviderConfig;
 import dev.cerus.mcheadrender.config.SkinProviderConfig;
+import dev.cerus.mcheadrender.filter.Filter;
+import dev.cerus.mcheadrender.filter.GrayscaleFilter;
+import dev.cerus.mcheadrender.filter.InvertFilter;
 import dev.cerus.mcheadrender.image.DefaultImageCache;
 import dev.cerus.mcheadrender.renderer.FlatRenderer;
 import dev.cerus.mcheadrender.renderer.IsometricRenderer;
@@ -22,6 +25,7 @@ public class Launcher {
         // Init registries
         final Registry<Renderer> rendererRegistry = new Registry<>(Renderer::id, "flat", new FlatRenderer(), new IsometricRenderer());
         final Registry<SkinProvider> skinProviderRegistry = new Registry<>(SkinProvider::id, "mojang", new MojangSkinProvider());
+        final Registry<Filter> filterRegistry = new Registry<>(Filter::id, null, new GrayscaleFilter(), new InvertFilter());
 
         // Init skin provider config
         final SkinProviderConfig skinProviderConfig = new JsonFileSkinProviderConfig(new File("skin_provider.json"));
@@ -31,6 +35,7 @@ public class Launcher {
         final WebServer webServer = new WebServer(
                 rendererRegistry,
                 skinProviderRegistry,
+                filterRegistry,
                 new DefaultImageCache()
         );
         webServer.start(Globals.API_HOST, Globals.API_PORT);
